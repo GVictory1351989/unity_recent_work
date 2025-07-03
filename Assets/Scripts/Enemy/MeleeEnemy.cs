@@ -1,9 +1,10 @@
 using UnityEngine;
-public class MeleeEnemy : Enemy
+public class MeleeEnemy : FSMAbstract<MeleeEnemy>
 {
-    public override void MoveTowardsTarget(Vector3 targetPoint)
+    public Vector3 TargetPoint { get; set; }
+    protected override IFSMState<MeleeEnemy> GetInitialState()
     {
-        Vector3 direction = (targetPoint - transform.position).normalized;
-        transform.position += direction * Time.deltaTime * 3f; 
+        return new MeleeIdleState();
     }
 }
+

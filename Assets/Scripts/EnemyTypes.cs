@@ -1,5 +1,5 @@
 /// <summary>
-/// Enemy Type 
+/// FSMAbstract Type 
 /// </summary>
 public enum EnemyType
 {
