@@ -5,11 +5,11 @@ public class ExploderEnemy : Enemy
 {
     protected override void MoveTowardsTarget(Vector3 targetPoint)
     {
-        Vector3 direction = (targetPoint - Position).normalized;
-        Position += direction * Time.deltaTime * 4f; // Fast rush
+        Vector3 direction = (targetPoint - transform.position).normalized;
+        transform.position += direction * Time.deltaTime * 4f; // Fast rush
 
         float explodeDistance = 1.5f;
-        if (Vector3.Distance(Position, targetPoint) < explodeDistance)
+        if (Vector3.Distance(transform.position, targetPoint) < explodeDistance)
         {
             Explode();
         }

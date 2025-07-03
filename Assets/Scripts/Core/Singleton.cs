@@ -7,7 +7,6 @@
 /// The class type which should behave like a singleton. 
 /// It must have a public parameterless constructor.
 /// </typeparam>
-
 public class Singleton<T> where T : class ,new()
 {
     private static readonly  T instance = new T();

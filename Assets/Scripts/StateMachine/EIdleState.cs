@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EIdleState : IEnemyStateMachine
+public class EIdleState : IEnemyState
 {
     public void Enter(Enemy enemy)
     {
