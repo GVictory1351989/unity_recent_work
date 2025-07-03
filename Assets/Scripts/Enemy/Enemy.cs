@@ -5,6 +5,11 @@ using UnityEngine;
 public abstract class Enemy : MonoBehaviour , IGameSystem
 {
     /// <summary>
+    /// suppose bullet fire or any trajecctile 
+    /// then by span change calculation of that 
+    /// </summary>
+    public int ID => GetInstanceID(); // id attach 
+    /// <summary>
     /// Finite State Machine for this enemy.
     /// </summary>
     protected IEnemyStateMachine statemachine = new ESMachine();
