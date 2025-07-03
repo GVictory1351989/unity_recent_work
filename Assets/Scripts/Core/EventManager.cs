@@ -4,20 +4,20 @@ using System.Collections.Generic;
 /// Make an event manager which handle events base communication 
 /// and loose coupling promote top level of cohesion communication 
 /// </summary>
-public class EventManager : Singleton<EventManager>
+public class EventManager 
 {
     /// <summary>
     /// Dictionary have delegates 
     /// where multiple methods attach with a single delegate 
     /// </summary>
-    public Dictionary<Type, Delegate> events = new Dictionary<Type, Delegate>();
+    private static Dictionary<Type, Delegate> events = new Dictionary<Type, Delegate>();
     /// <summary>
     /// In this method, we are adding a new method (callback) to event list.
     /// So, when event happens, this method will be called.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="callback"></param>
-    public void Subscribe<T>(EventHandler<GameEvent<T>> callback)
+    public static void Subscribe<T>(EventHandler<GameEvent<T>> callback)
     {
         Type eventtype = typeof(T);
         if (events.TryGetValue(eventtype, out var existing))
@@ -33,7 +33,7 @@ public class EventManager : Singleton<EventManager>
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="callback"></param>
-    public void Unsubscribe<T>(EventHandler<GameEvent<T>> callback)
+    public static void Unsubscribe<T>(EventHandler<GameEvent<T>> callback)
     {
         Type eventType = typeof(T);
 
@@ -53,7 +53,7 @@ public class EventManager : Singleton<EventManager>
     /// <typeparam name="T"></typeparam>
     /// <param name="sender"></param>
     /// <param name="evt"></param>
-    public void Publish<T>(object sender, GameEvent<T> evt)
+    public static void Publish<T>(object sender, GameEvent<T> evt)
     {
         Type eventType = typeof(T);
 
