@@ -22,7 +22,6 @@ public class ESMachine : IEnemyStateMachine
         currentState = newState;          // set new state
         currentState?.Enter(enemy);       // enter into new state
     }
-
     /// <summary>
     /// This method is called every frame.
     /// It updates the current state.
