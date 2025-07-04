@@ -20,39 +20,28 @@ public class EnemySpawner : MonoBehaviour
                 case EnemyType.Explode:
                     SpawnEnemyType<ExplodedEnemy>(preset, nameof(ExplodedEnemy));
                     break;
+                case EnemyType.MeleeBullet: // dont use for melee bullet config 
+                    SpawnEnemyType<BulletFSM>(preset, nameof(BulletFSM),false);
+                    break;
+                case EnemyType.ProjectileBullet:// dont use for melee bullet config 
+                    SpawnEnemyType<MissileFSM>(preset, nameof(MissileFSM),false);
+                    break;
             }
         }
     }
-    private void SpawnEnemyType<T>(EnemyPresetSO preset, string entityName) where T : FSMAbstract<T>
+    private void SpawnEnemyType<T>(EnemyPresetSO preset, string entityName , bool isconfig=true) where T : FSMAbstract<T>
     {
         var enemyList = PoolBehavior.Instance.AddList<T>(preset.VisualPreset, preset.SpwnAmount);
         foreach (var enemy in enemyList)
         {
             enemy.SetEntityID(entityName, ++counter);
-            if (enemy is IEnemy configurer) // not in base class 
+            if (isconfig)
             {
-                configurer.SetEntityConfigSO(preset.Weapon); // so now implement in interface 
+                if (enemy is IEnemy configurer) // not in base class 
+                {
+                    configurer.SetEntityConfigSO(preset.Weapon); // so now implement in interface 
+                }
             }
-        }
-    }
-    public void Spawn(EnemyPresetSO preset)
-    {
-        switch (preset.EnemyType)
-        {
-            case EnemyType.Melee:
-                var melee = PoolBehavior.Instance.Get<MeleeEnemy>();
-                melee.transform.position = transform.position;
-                break;
-
-            case EnemyType.Ranged:
-                var ranged = PoolBehavior.Instance.Get<RangedEnemy>();
-                ranged.transform.position = transform.position;
-                break;
-
-            case EnemyType.Explode:
-                var exploder = PoolBehavior.Instance.Get<ExplodedEnemy>();
-                exploder.transform.position = transform.position;
-                break;
         }
     }
 }

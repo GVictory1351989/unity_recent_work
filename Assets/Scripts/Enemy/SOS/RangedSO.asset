@@ -18,4 +18,4 @@ MonoBehaviour:
   StayTime: 5
   Health: 100
   FireRate: 1
-  SpwnAmount: 20
+  SpwnAmount: 100

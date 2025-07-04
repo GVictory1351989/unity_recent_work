@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class MissileHit : IFSMState<MissileFSM>
 {
     public void Enter(FSMAbstract<MissileFSM> fsm)

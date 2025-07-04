@@ -5,5 +5,8 @@ public enum EnemyType
 {
   Melee,
   Ranged,
-  Explode
+  Explode,
+  MeleeBullet,
+  ProjectileBullet,
+  ExplodeBullet
 }

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 61d6ec134564b8645ae97d729f0d0ca1, type: 3}
-  m_Name: ExplodeSO
+  m_Name: MeleeBulletSO
   m_EditorClassIdentifier: 
-  EnemyType: 2
-  Weapon: {fileID: 11400000, guid: af83792a5c893294ea8e2a62f83836e2, type: 2}
-  VisualPreset: {fileID: 2669836744310470759, guid: bdbabd698646a124ba8db0ab24eeb01f, type: 3}
+  EnemyType: 3
+  Weapon: {fileID: 0}
+  VisualPreset: {fileID: 2226091874268054422, guid: d84b4b7022de15d43a48a4fef7b1b7dc, type: 3}
   StayTime: 5
   Health: 100
   FireRate: 1

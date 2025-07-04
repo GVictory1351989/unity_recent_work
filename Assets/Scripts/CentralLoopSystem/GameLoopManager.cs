@@ -5,7 +5,6 @@ public static class GameLoopManager
     private static readonly List<IGameSystem> systems = new List<IGameSystem>();
     public static void Register(IGameSystem system)
     {
-        // Optional: use HashSet to avoid O(n) Contains
         if (!systems.Contains(system))
             systems.Add(system);
     }
