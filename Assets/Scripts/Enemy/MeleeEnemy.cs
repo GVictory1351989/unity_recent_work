@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 public class MeleeEnemy : FSMAbstract<MeleeEnemy>, IEnemy
 {
@@ -6,9 +7,14 @@ public class MeleeEnemy : FSMAbstract<MeleeEnemy>, IEnemy
     public float FireRate { get; set; }
     public float StayTime { get; set; }
     public EnemyType EnemyType => EnemyType.Ranged;
+    public WeaponConfigSO WeaponConfig { get; private set; }
     protected override IFSMState<MeleeEnemy> GetInitialState()
     {
         return new MeleeIdle();
+    }
+    internal void SetEntityConfigSO(WeaponConfigSO weapon)
+    {
+        WeaponConfig = weapon;
     }
 }
 

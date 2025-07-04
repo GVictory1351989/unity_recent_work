@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 public interface IEnemy
 {
-    Vector3 TargetPoint { get; set; }  
-    int Health { get; set; }    
-    float FireRate { get; set; }  
-    float StayTime { get; set; } 
-
-    EnemyType EnemyType { get; } 
+    Vector3 TargetPoint { get; set; }
+    int Health { get; set; }
+    float FireRate { get; set; }
+    float StayTime { get; set; }
+    EnemyType EnemyType { get; }
+    WeaponConfigSO WeaponConfig { get; }
 }
