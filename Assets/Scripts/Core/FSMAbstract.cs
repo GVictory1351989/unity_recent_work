@@ -7,13 +7,18 @@ using UnityEngine;
 public abstract class FSMAbstract<T> : MonoBehaviour , IGameSystem 
                                        where T : FSMAbstract<T>
 {
+    private readonly float tickRate = 0.1f;
+
     private bool isActiveFSM = false;
     private float lastTick;
-    private readonly float tickRate = 0.1f;
-    public int ID => GetInstanceID();
+    public static int IDCounter;
+    public EntityId EntityId { get; private set; }
     private IFSMState<T> currentState;
     protected abstract IFSMState<T> GetInitialState();
-
+    public void SetEntityID(string type, int id)
+    {
+        EntityId = new EntityId(type, id);
+    }
     protected virtual void Init(IFSMState<T> initialState)
     {
         currentState = initialState;
