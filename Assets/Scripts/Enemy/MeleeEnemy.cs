@@ -12,7 +12,7 @@ public class MeleeEnemy : FSMAbstract<MeleeEnemy>, IEnemy
     {
         return new MeleeIdle();
     }
-    internal void SetEntityConfigSO(WeaponConfigSO weapon)
+    public void SetEntityConfigSO(WeaponConfigSO weapon)
     {
         WeaponConfig = weapon;
     }

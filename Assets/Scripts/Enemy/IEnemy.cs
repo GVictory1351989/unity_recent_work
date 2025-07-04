@@ -9,4 +9,5 @@ public interface IEnemy
     float StayTime { get; set; }
     EnemyType EnemyType { get; }
     WeaponConfigSO WeaponConfig { get; }
+    void SetEntityConfigSO(WeaponConfigSO weapon);
 }

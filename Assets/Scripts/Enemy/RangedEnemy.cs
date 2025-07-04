@@ -12,8 +12,7 @@ public class RangedEnemy : FSMAbstract<RangedEnemy> , IEnemy
     {
         return new RangedIdle();
     }
-
-    internal void SetEntityConfigSO(WeaponConfigSO weapon)
+    public void SetEntityConfigSO(WeaponConfigSO weapon)
     {
         WeaponConfig = weapon;
     }

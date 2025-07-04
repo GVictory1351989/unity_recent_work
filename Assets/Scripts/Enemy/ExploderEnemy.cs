@@ -12,7 +12,7 @@ public class ExplodedEnemy : FSMAbstract<ExplodedEnemy>, IEnemy
     {
         return new ExplodeIdle();
     }
-    internal void SetEntityConfigSO(WeaponConfigSO weapon)
+    public void SetEntityConfigSO(WeaponConfigSO weapon)
     {
         WeaponConfig = weapon;
     }

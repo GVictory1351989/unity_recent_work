@@ -4,41 +4,37 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     public EnemyPresetSO[] presets; // Assign in Inspector or load via Resources
+    private int counter = 0; // id assign also 
     void Awake()
     {
-        int Counter = 0;
         foreach (var preset in presets)
         {
             switch (preset.EnemyType)
             {
                 case EnemyType.Melee:
-                   var meleelist = PoolBehavior.Instance.AddList<MeleeEnemy>(preset.VisualPreset, preset.SpwnAmount);
-                    foreach (MeleeEnemy obj in meleelist)
-                    {
-                        obj.SetEntityID(nameof(MeleeEnemy), ++Counter);
-                        obj.SetEntityConfigSO(preset.Weapon);
-                    }
+                    SpawnEnemyType<MeleeEnemy>(preset, nameof(MeleeEnemy));
                     break;
                 case EnemyType.Ranged:
-                    var rangedlist = PoolBehavior.Instance.AddList<RangedEnemy>(preset.VisualPreset,preset.SpwnAmount);
-                    foreach (RangedEnemy obj in rangedlist)
-                    {
-                        obj.SetEntityID(nameof(RangedEnemy), ++Counter);
-                        obj.SetEntityConfigSO(preset.Weapon);
-                    }
+                    SpawnEnemyType<RangedEnemy>(preset, nameof(RangedEnemy));
                     break;
                 case EnemyType.Explode:
-                    var explodelist = PoolBehavior.Instance.AddList<ExplodedEnemy>(preset.VisualPreset, preset.SpwnAmount);
-                    foreach (ExplodedEnemy obj in explodelist)
-                    {
-                        obj.SetEntityID(nameof(ExplodedEnemy), ++Counter);
-                        obj.SetEntityConfigSO(preset.Weapon);
-                    }
+                    SpawnEnemyType<ExplodedEnemy>(preset, nameof(ExplodedEnemy));
                     break;
             }
         }
     }
-
+    private void SpawnEnemyType<T>(EnemyPresetSO preset, string entityName) where T : FSMAbstract<T>
+    {
+        var enemyList = PoolBehavior.Instance.AddList<T>(preset.VisualPreset, preset.SpwnAmount);
+        foreach (var enemy in enemyList)
+        {
+            enemy.SetEntityID(entityName, ++counter);
+            if (enemy is IEnemy configurer) // not in base class 
+            {
+                configurer.SetEntityConfigSO(preset.Weapon); // so now implement in interface 
+            }
+        }
+    }
     public void Spawn(EnemyPresetSO preset)
     {
         switch (preset.EnemyType)
