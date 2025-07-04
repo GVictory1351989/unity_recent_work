@@ -6,7 +6,10 @@ public class ExplodedEnemy : FSMAbstract<ExplodedEnemy>, IEnemy
     public int Health { get; set; }
     public float FireRate { get; set; }
     public float StayTime { get; set; }
-    public EnemyType EnemyType => EnemyType.Ranged;
+    public float AvoidRadius { get; set; }
+    public float AttackCooldown { get; set; }
+    public float Damage { get; set; }
+    public EnemyType EnemyType => EnemyType.Explode;
     public WeaponConfigSO WeaponConfig { get; private set; }
     protected override IFSMState<ExplodedEnemy> GetInitialState()
     {
@@ -15,6 +18,11 @@ public class ExplodedEnemy : FSMAbstract<ExplodedEnemy>, IEnemy
     public void SetEntityConfigSO(WeaponConfigSO weapon)
     {
         WeaponConfig = weapon;
+        AvoidRadius = weapon.Range;
+        AttackCooldown = weapon.Cooldown;
+        Damage = weapon.Damage;
+        StayTime = weapon.StayTime;
+        Health = weapon.Health;
     }
 }
 

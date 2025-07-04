@@ -199,8 +199,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1699db800e26b449a0b9020557c90db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meleeEnemyPrefab: {fileID: 0}
-  player: {fileID: 1320724889}
 --- !u!4 &383353183
 Transform:
   m_ObjectHideFlags: 0
@@ -415,8 +413,8 @@ GameObject:
   - component: {fileID: 1320724887}
   - component: {fileID: 1320724886}
   m_Layer: 0
-  m_Name: Target
-  m_TagString: Untagged
+  m_Name: Player
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
