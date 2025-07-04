@@ -6,10 +6,7 @@ public class BulletHit : IFSMState<BulletFSM>
     public void Enter(FSMAbstract<BulletFSM> fsm)
     {
         var bullet = fsm as BulletFSM;
-        if (bullet.Target != null)
-        {
-            PoolBehavior.Instance.ReturnToPool(bullet);
-        }
+        EventManager.Publish(null, new GameEvent<Component>(bullet));
     }
 
     public void Update(FSMAbstract<BulletFSM> fsm) { }

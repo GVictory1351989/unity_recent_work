@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MeleeChase : IFSMState<MeleeEnemy>
 {
-    private float speed = 3f;
+    private float speed = 15f;
     private Transform Player;
     public void Enter(FSMAbstract<MeleeEnemy> fsmentity)
     {

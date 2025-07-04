@@ -5,7 +5,7 @@ public class MeleeIdle : IFSMState<MeleeEnemy>
     private float timer;
     public void Enter(FSMAbstract<MeleeEnemy> fsmentity)
     {
-        timer = 2f;
+        timer = 0.5f;
     }
 
     public void Update(FSMAbstract<MeleeEnemy> fsmentity)

@@ -20,10 +20,10 @@ public class EnemySpawner : MonoBehaviour
                 case EnemyType.Explode:
                     SpawnEnemyType<ExplodedEnemy>(preset, nameof(ExplodedEnemy));
                     break;
-                case EnemyType.MeleeBullet: // dont use for melee bullet config 
+                case EnemyType.MeleeBullet: 
                     SpawnEnemyType<BulletFSM>(preset, nameof(BulletFSM),false);
                     break;
-                case EnemyType.ProjectileBullet:// dont use for melee bullet config 
+                case EnemyType.ProjectileBullet:
                     SpawnEnemyType<MissileFSM>(preset, nameof(MissileFSM),false);
                     break;
             }
@@ -31,7 +31,7 @@ public class EnemySpawner : MonoBehaviour
     }
     private void SpawnEnemyType<T>(EnemyPresetSO preset, string entityName , bool isconfig=true) where T : FSMAbstract<T>
     {
-        var enemyList = PoolBehavior.Instance.AddList<T>(preset.VisualPreset, preset.SpwnAmount);
+        var enemyList = PoolManager.AddList<T>(preset.VisualPreset, preset.SpwnAmount);
         foreach (var enemy in enemyList)
         {
             enemy.SetEntityID(entityName, ++counter);

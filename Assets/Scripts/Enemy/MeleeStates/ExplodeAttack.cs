@@ -7,6 +7,8 @@ public class ExplodeAttack : IFSMState<ExplodedEnemy>
 {
     public void Enter(FSMAbstract<ExplodedEnemy> fsmentity)
     {
+        var exploder = fsmentity as ExplodedEnemy;
+        EventManager.Publish(null, new GameEvent<Component>(exploder));
     }
     public void Exit(FSMAbstract<ExplodedEnemy> fsmentity)
     {

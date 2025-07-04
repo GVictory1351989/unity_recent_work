@@ -5,7 +5,7 @@ public static class GameLoopManager
     private static readonly List<IGameSystem> systems = new List<IGameSystem>();
     public static void Register(IGameSystem system)
     {
-        if (!systems.Contains(system))
+        if (system != null && !systems.Contains(system))
             systems.Add(system);
     }
 
@@ -17,11 +17,14 @@ public static class GameLoopManager
     public static void TickAll()
     {
         float now = UnityEngine.Time.time;
-        int count = systems.Count;
-
-        for (int i = 0; i < count; i++)
+        for (int i = systems.Count - 1; i >= 0; i--)
         {
-            systems[i].Tick(now); // Use shared time param (less Time.time calls)
+            if (systems[i] == null)
+            {
+                systems.RemoveAt(i); 
+                continue;
+            }
+            systems[i].Tick(now);
         }
     }
 }

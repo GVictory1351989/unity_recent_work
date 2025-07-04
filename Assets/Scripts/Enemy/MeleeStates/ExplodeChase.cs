@@ -6,15 +6,29 @@ using UnityEngine;
 
 public class ExplodeChase : IFSMState<ExplodedEnemy>
 {
-    public void Enter(FSMAbstract<ExplodedEnemy> fsmentity)
+    private float speed = 18f;
+    private Transform player;
+    public void Enter(FSMAbstract<ExplodedEnemy> enemy)
     {
-       
+        player = GameObject.FindWithTag("Player")?.transform;
     }
-    public void Exit(FSMAbstract<ExplodedEnemy> fsmentity)
+    public void Update(FSMAbstract<ExplodedEnemy> enemy)
     {
+        if (player == null) return;
+        float distance = Vector3.Distance(player.position, enemy.transform.position);
+        if (distance <=1.1)
+        {
+            enemy.ChangeState(new ExplodeAttack());
+            return;
+        }
+        Vector3 direction = (player.position - enemy.transform.position).normalized;
+        enemy.transform.position += direction * speed * Time.deltaTime;
+        if (direction != Vector3.zero)
+        {
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation, lookRotation, Time.deltaTime * 5f);
+        }
     }
-    public void Update(FSMAbstract<ExplodedEnemy> fsmentity)
-    {
-      
-    }
+
+    public void Exit(FSMAbstract<ExplodedEnemy> enemy) { }
 }

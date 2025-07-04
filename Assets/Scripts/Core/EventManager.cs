@@ -65,4 +65,9 @@ public class EventManager
             }
         }
     }
+
+    internal static void Subscribe<T>(object p)
+    {
+        throw new NotImplementedException();
+    }
 }

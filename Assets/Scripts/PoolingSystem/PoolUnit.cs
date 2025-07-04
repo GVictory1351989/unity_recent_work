@@ -1,12 +1,29 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class PoolBehavior : Singleton<PoolBehavior>
+public static class PoolManager
 {
-    private Dictionary<Type, Queue<GameObject>> poolObjects = new();
-    private Dictionary<Type, GameObject> prefabMap = new();
-    public void Add<T>(GameObject prefab, int count = 10 ) where T : Component
+    private static Dictionary<Type, Queue<GameObject>> poolObjects = new();
+    private static Dictionary<Type, GameObject> prefabMap = new();
+    public  static Func<Type, Component> GetByType;
+    static PoolManager()
+    {
+        InitializeDelegates();
+    }
+    public static void InitializeDelegates()
+    {
+        GetByType = (type) =>
+        {
+            if (type == typeof(MeleeEnemy)) return Get<MeleeEnemy>();
+            if (type == typeof(RangedEnemy)) return Get<RangedEnemy>();
+            if (type == typeof(ExplodedEnemy)) return Get<ExplodedEnemy>();
+            if (type == typeof(BulletFSM)) return Get<BulletFSM>();
+            if (type == typeof(MissileFSM)) return Get<MissileFSM>();
+            return null;
+        };
+    }
+    public static bool HasPool(Type type) => poolObjects.ContainsKey(type);
+    public static void Add<T>(GameObject prefab, int count = 10 ) where T : Component
     {
         Type type = typeof(T);
         if (!poolObjects.ContainsKey(type))
@@ -22,7 +39,7 @@ public class PoolBehavior : Singleton<PoolBehavior>
             }
         }
     }
-    public List<T> AddList<T>(GameObject prefab, int count = 10) where T : Component
+    public static List<T> AddList<T>(GameObject prefab, int count = 10) where T : Component
     {
         Type type = typeof(T);
         List<T> components = new List<T>();
@@ -43,7 +60,7 @@ public class PoolBehavior : Singleton<PoolBehavior>
         return components;
     }
 
-    public T Get<T>() where T : Component
+    private static T Get<T>() where T : Component
     {
         Type type = typeof(T);
         Queue<GameObject> queue = poolObjects[type];
@@ -52,7 +69,7 @@ public class PoolBehavior : Singleton<PoolBehavior>
         obj.SetActive(true);
         return obj.GetComponent<T>();
     }
-    public IEnumerable<GameObject> GetAllInactiveObjectsOfType<T>() where T : Component
+    public static IEnumerable<GameObject> GetAllInactiveObjectsOfType<T>() where T : Component
     {
         Type type = typeof(T);
         if (poolObjects.TryGetValue(type, out var queue))
@@ -61,7 +78,7 @@ public class PoolBehavior : Singleton<PoolBehavior>
         }
         return new List<GameObject>(); // Return empty if type not found
     }
-    public void ReturnToPool<T>(T obj) where T : Component
+    public static void ReturnToPool<T>(T obj) where T : Component
     {
         Type type = typeof(T);
         obj.gameObject.SetActive(false);

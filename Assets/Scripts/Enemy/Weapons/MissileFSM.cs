@@ -7,6 +7,7 @@ public class MissileFSM : FSMAbstract<MissileFSM>
     public float Speed { get; private set; }
     public float RotateSpeed { get; private set; }
     public float Damage { get; private set; }
+    public Transform Player;
     public void Init(Transform target, float speed, float rotateSpeed, float damage)
     {
         Target = target;
@@ -17,6 +18,9 @@ public class MissileFSM : FSMAbstract<MissileFSM>
 
     protected override IFSMState<MissileFSM> GetInitialState()
     {
+        Player = GameObject.FindGameObjectWithTag("Player").transform;
+        Speed = 35f;
+        RotateSpeed = 10f;
         return new MissileFly();
     }
 }

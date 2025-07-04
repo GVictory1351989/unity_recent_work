@@ -6,7 +6,7 @@ public class MissileHit : IFSMState<MissileFSM>
     public void Enter(FSMAbstract<MissileFSM> fsm)
     {
         var missile = fsm as MissileFSM;
-        PoolBehavior.Instance.ReturnToPool(missile);
+        EventManager.Publish(null, new GameEvent<Component>(missile));
     }
     public void Update(FSMAbstract<MissileFSM> fsm) { }
     public void Exit(FSMAbstract<MissileFSM> fsm) { }
