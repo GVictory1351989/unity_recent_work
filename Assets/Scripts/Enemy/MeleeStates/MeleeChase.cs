@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-public class MeleeMoveState : IFSMState<MeleeEnemy>
+public class MeleeChase : IFSMState<MeleeEnemy>
 {
-  
     public void Enter(FSMAbstract<MeleeEnemy> fsmentity)
     {
        

@@ -1,14 +1,14 @@
 using UnityEngine;
-public class MeleeEnemy : FSMAbstract<MeleeEnemy>, IEnemy
+public class ExplodedEnemy : FSMAbstract<ExplodedEnemy>, IEnemy
 {
     public Vector3 TargetPoint { get; set; }
     public int Health { get; set; }
     public float FireRate { get; set; }
     public float StayTime { get; set; }
     public EnemyType EnemyType => EnemyType.Ranged;
-    protected override IFSMState<MeleeEnemy> GetInitialState()
+    protected override IFSMState<ExplodedEnemy> GetInitialState()
     {
-        return new MeleeIdle();
+        return new ExplodeIdle();
     }
 }
 

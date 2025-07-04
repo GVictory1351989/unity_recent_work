@@ -31,13 +31,12 @@ public abstract class FSMAbstract<T> : MonoBehaviour , IGameSystem
         currentState = newState;
         currentState?.Enter((T)this);
     }
-    public void Tick()
+    public void Tick(float nowTime)
     {
         if (!isActiveFSM) return;
-
-        if (Time.time - lastTick >= tickRate)
+        if (nowTime - lastTick >= tickRate)
         {
-            lastTick = Time.time;
+            lastTick = nowTime;
             currentState.Update(this);
         }
     }

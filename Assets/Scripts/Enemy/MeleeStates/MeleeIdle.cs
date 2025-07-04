@@ -1,6 +1,6 @@
 ﻿
 using UnityEngine;
-public class MeleeIdleState : IFSMState<MeleeEnemy>
+public class MeleeIdle : IFSMState<MeleeEnemy>
 {
     public void Enter(FSMAbstract<MeleeEnemy> enemy)
     {

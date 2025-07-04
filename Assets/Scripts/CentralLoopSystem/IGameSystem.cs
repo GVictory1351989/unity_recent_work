@@ -3,6 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 public interface IGameSystem
 {
-    void Tick(); // like Update()
+    void Tick(float time); // like Update()
 }
 
