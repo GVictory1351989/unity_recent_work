@@ -104,14 +104,24 @@ public static class PoolManager
     private static T Get<T>() where T : Component
     {
         Type type = typeof(T);
+
+        if (!poolObjects.ContainsKey(type) || poolObjects[type].Count == 0)
+        {
+            Debug.LogWarning($"Pool for {type.Name} is empty!");
+            return null; // Or create new if you want auto-expand
+        }
         Queue<GameObject> queue = poolObjects[type];
-
-        // Dequeue (take out) one object from the pool
         GameObject obj = queue.Dequeue();
-        obj.SetActive(true); // Activate it
+        if (obj == null)
+        {
+            Debug.LogError($"Dequeued null object from pool of type {type.Name}");
+            return null;
+        }
 
-        return obj.GetComponent<T>(); // Return the requested component
+        obj.SetActive(true);
+        return obj.GetComponent<T>();
     }
+
 
     /// <summary>
     /// Returns all currently inactive pooled GameObjects of a specific type.
