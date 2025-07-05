@@ -1,0 +1,96 @@
+
+* Separates logic from data (via ScriptableObjects)
+* Enables plug-and-play enemy types (Melee, Ranged, Bullet, Missile)
+* Avoids tight coupling (`new`), hardcoded transitions, and duplicate code
+
+FSMAbstract<T>->Base class for all FSM-enabled enemies
+                Generic to support any enemy type (`T : FSMAbstract<T>`)
+				Handles:
+				  * `Enter`, `Update`, `Exit` FSM cycle
+				  * Hit event handling via `IDamagable`
+				  * `Tick()` system (low-frequency logic updates)
+				  * Initial state via `FSMStateRegistry<T>`
+				  * Dynamic state change via name:
+
+					```csharp
+					ChangeStateByName("Chase");
+					```
+					Used by:
+
+					* `EnemyBase<T>`
+					* `MeleeEnemy`, `BulletFSM`, `MissileFSM`, etc.
+
+
+`IFSMState<T>`
+            Standard `Enter()`, `Update()`, `Exit()` lifecycle
+
+
+`FSMStateAttribute` & `[Preserve]`
+
+[FSMState("Idle", isInitial: true)]
+[Preserve]
+public class MeleeIdle : IFSMState<MeleeEnemy> { ... }
+Used to auto-register state types via reflection
+
+`FSMStateRegistry<T>`
+- Auto-discovers all `[FSMState]` types at runtime
+- Supports:
+  - Initial state lookup:
+    ```csharp
+    GetInitialStateInstance();
+    ```
+  - Dynamic transition:
+
+    ```csharp
+    GetStateType("Chase");
+    ```
+
+
+`EnemyBase<T>`
+    `FSMAbstract<T>`
+	`IEnemy`
+	   Shared config values (health, speed, rotate speed, etc.)
+	   Slider UI updates (health bar)
+	     Initialization via: paramerers
+		 
+		 Used by:
+`MeleeEnemy`
+`RangedEnemy`
+`ExplodedEnemy`
+
+`IEnemy`
+
+Common interface for all enemy types
+
+Defines:
+
+`Health`, `FireRate`, `AvoidRadius`, etc.
+`TargetPoint` property
+`EnemyType` enum
+Setup config method
+
+This enables:
+
+* Unified pooling
+* Centralized wave spawning
+* Easy support for new enemy types
+---
+`EntityId`
+Used in ECS-style logic to tag enemies by type & ID:
+```csharp
+public EntityId EntityId { get; private set; }
+...
+For ECS start think , but for ECS lot of things 
+
+WeaponConfigSO
+```csharp
+[CreateAssetMenu(menuName = "FSM/Weapon Config")]
+
+* `WeaponType`, `EnemyType`
+* `Damage`, `Range`, `Cooldown`
+* `ProjectilePrefab`, `SpawnAmount`
+---
+
+`PoolManager`
+ Supports `Add<T>()`, `Get<T>()`, `ReturnToPool<T>()`
+ Used by :- `WaveManager`, `EnemySpawner`, all enemies
