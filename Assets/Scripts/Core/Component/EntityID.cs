@@ -8,6 +8,7 @@ public readonly struct EntityId
         Type = type;
         Id = id;
     }
+    public override string ToString() => Type + Id;
     public override int GetHashCode() => HashCode.Combine(Type, Id);
     public override bool Equals(object obj) => obj is EntityId other && other.Type == Type && other.Id == Id;
 }

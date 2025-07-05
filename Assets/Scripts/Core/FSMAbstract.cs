@@ -4,7 +4,7 @@ using UnityEngine;
 /// mean modify this for flexible more states addon 
 /// </summary>
 /// <typeparam name="T"></typeparam>
-public abstract class FSMAbstract<T> : MonoBehaviour , IGameSystem 
+public abstract class FSMAbstract<T> : MonoBehaviour , IGameSystem,IDamagable
                                        where T : FSMAbstract<T>
 {
     private readonly float tickRate = 0.1f;
@@ -44,11 +44,33 @@ public abstract class FSMAbstract<T> : MonoBehaviour , IGameSystem
     {
         Init(GetInitialState());
         GameLoopManager.Register(this);
+        EventManager.Subscribe<HitEvent>(OnHitted);
     }
-
+    private void OnHitted(object sender, GameEvent<HitEvent> evt)
+    {
+        if (evt.Data != null)
+        {
+            if (evt.Data.HittedObject==gameObject)
+            {
+                FSMHitted();
+            }
+        }
+    }
+    public virtual void FSMHitted()
+    {
+    }
     protected virtual void OnDisable()
     {
         GameLoopManager.Unregister(this);
+        EventManager.Unsubscribe<HitEvent>( OnHitted);
     }
+
+}
+/// <summary>
+/// For Hit Event Tract 
+/// </summary>
+public class HitEvent
+{
+    public GameObject HittedObject;
 
 }

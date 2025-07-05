@@ -2,23 +2,16 @@
 using System;
 public class MeleeAttack : IFSMState<MeleeEnemy>
 {
-    private float attackCooldown = 1.5f;
     private float timer = 0f;
-    private Transform player;
     public void Enter(FSMAbstract<MeleeEnemy> fsmentity)
     {
-        GameObject playerObj = GameObject.FindWithTag("Player");
-        if (playerObj != null)
-        {
-            player = playerObj.transform;
-        }
         timer = 0f;
     }
     public void Update(FSMAbstract<MeleeEnemy> fsmentity)
     {
         var enemy = fsmentity as MeleeEnemy;
         timer += Time.deltaTime;
-        float dist = Vector3.Distance(player.position, fsmentity.transform.position);
+        float dist = Vector3.Distance(enemy.TargetPoint, fsmentity.transform.position);
         if (dist > enemy.AvoidRadius)
         {
             fsmentity.ChangeState(new MeleeChase());
@@ -38,7 +31,8 @@ public class MeleeAttack : IFSMState<MeleeEnemy>
 
     private void PerformAttack(FSMAbstract<MeleeEnemy> fsmentity)
     {
-    
+        Component bulletObj = PoolManager.GetByType(typeof(BulletFSM));
+        bulletObj.transform.position = fsmentity.transform.position + Vector3.up;
     }
 }
 

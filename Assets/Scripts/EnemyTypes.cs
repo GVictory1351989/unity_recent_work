@@ -8,5 +8,6 @@ public enum EnemyType
   Explode,
   MeleeBullet,
   ProjectileBullet,
-  ExplodeBullet
+  ExplodeBullet,
+  None
 }

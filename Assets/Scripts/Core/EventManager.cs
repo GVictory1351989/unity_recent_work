@@ -46,6 +46,17 @@ public class EventManager
                 events[eventType] = current;
         }
     }
+
+    internal static void Subscribe(string v, object hitEvent)
+    {
+        throw new NotImplementedException();
+    }
+
+    internal static void Unsubscribe(string v, object hitEvent)
+    {
+        throw new NotImplementedException();
+    }
+
     /// <summary>
     ///This method sends(publishes) the event to all subscribed listeners.
     /// All methods that are subscribed to this event type will be called.

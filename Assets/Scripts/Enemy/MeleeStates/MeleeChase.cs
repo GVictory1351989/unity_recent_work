@@ -16,7 +16,7 @@ public class MeleeChase : IFSMState<MeleeEnemy>
         Vector3 dir = (Player.position - fsmentity.transform.position).normalized;
         fsmentity.transform.position += dir * speed * Time.deltaTime;
         float dist = Vector3.Distance(Player.position, fsmentity.transform.position);
-        if (dist <= 1.5f) 
+        if (dist <= 4f) 
         {
             fsmentity.ChangeState(new MeleeAttack());
         }

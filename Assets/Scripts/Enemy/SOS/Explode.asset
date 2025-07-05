@@ -10,10 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd937054ee4b0f447a9322dc249ee0ea, type: 3}
-  m_Name: BulletWeapon
+  m_Name: Explode
   m_EditorClassIdentifier: 
-  WeaponType: 1
-  ProjectilePrefab: {fileID: 0}
+  Speed: 30
+  Health: 10
+  StayTime: 3
+  RotateSpeed: 10
+  WeaponType: 3
+  EnemyType: 2
+  ProjectilePrefab: {fileID: 2669836744310470759, guid: bdbabd698646a124ba8db0ab24eeb01f, type: 3}
   Cooldown: 1.5
   Range: 5
   Damage: 10
+  FireRate: 0.3
+  SpwnAmount: 20

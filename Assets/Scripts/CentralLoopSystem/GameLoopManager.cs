@@ -17,14 +17,13 @@ public static class GameLoopManager
     public static void TickAll()
     {
         float now = UnityEngine.Time.time;
-        for (int i = systems.Count - 1; i >= 0; i--)
+        systems.RemoveAll(s => s == null);
+        for (int i = 0; i < systems.Count; i++)
         {
-            if (systems[i] == null)
-            {
-                systems.RemoveAt(i); 
-                continue;
-            }
-            systems[i].Tick(now);
+            var system = systems[i];
+            if (system == null) continue;
+            system.Tick(now);
         }
     }
+
 }

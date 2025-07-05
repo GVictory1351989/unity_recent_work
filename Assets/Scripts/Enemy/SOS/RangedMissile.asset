@@ -10,10 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd937054ee4b0f447a9322dc249ee0ea, type: 3}
-  m_Name: ExplodeWeapon
+  m_Name: RangedMissile
   m_EditorClassIdentifier: 
-  WeaponType: 3
-  ProjectilePrefab: {fileID: 0}
+  Speed: 40
+  Health: 1
+  StayTime: 3
+  RotateSpeed: 10
+  WeaponType: 2
+  EnemyType: 4
+  ProjectilePrefab: {fileID: 3007593096231979489, guid: 7c6e720cb6a2d64439d66df24e25a3e2, type: 3}
   Cooldown: 1.5
   Range: 5
   Damage: 10
+  FireRate: 0.3
+  SpwnAmount: 20

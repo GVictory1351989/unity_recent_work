@@ -32,6 +32,7 @@ public class WaveManager : MonoBehaviour
 
     private IEnumerator SpawnWaves()
     {
+        yield return new WaitForSeconds(5f); // After 5 second start 
         while (currentWave < totalWaves)
         {
             currentWave++;

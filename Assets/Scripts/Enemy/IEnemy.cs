@@ -8,6 +8,11 @@ public interface IEnemy
     float FireRate { get; set; }
     float StayTime { get; set; }
     EnemyType EnemyType { get; }
-    WeaponConfigSO WeaponConfig { get; }
-    void SetEntityConfigSO(WeaponConfigSO weapon);
+    void SetEntityConfigSO(float range,
+                                 float cooldown,
+                                 float damage,
+                                 float staytime,
+                                 int health,
+                                 float speed,
+                                 float rotateSpeed);
 }

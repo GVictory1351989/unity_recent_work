@@ -10,10 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd937054ee4b0f447a9322dc249ee0ea, type: 3}
-  m_Name: ArcWeapon
+  m_Name: Ranged
   m_EditorClassIdentifier: 
+  Speed: 30
+  Health: 60
+  StayTime: 3
+  RotateSpeed: 10
   WeaponType: 2
-  ProjectilePrefab: {fileID: 0}
+  EnemyType: 1
+  ProjectilePrefab: {fileID: 3007593096231979489, guid: f8d766513877741459a1b07f5a9be8ac, type: 3}
   Cooldown: 1.5
   Range: 5
   Damage: 10
+  FireRate: 0.3
+  SpwnAmount: 20

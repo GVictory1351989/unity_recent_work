@@ -10,10 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd937054ee4b0f447a9322dc249ee0ea, type: 3}
-  m_Name: MeleeWeapon
+  m_Name: MeleeBullet
   m_EditorClassIdentifier: 
-  WeaponType: 0
-  ProjectilePrefab: {fileID: 0}
+  Speed: 30
+  Health: 1
+  StayTime: 3
+  RotateSpeed: 10
+  WeaponType: 1
+  EnemyType: 3
+  ProjectilePrefab: {fileID: 2226091874268054422, guid: d84b4b7022de15d43a48a4fef7b1b7dc, type: 3}
   Cooldown: 1.5
   Range: 5
   Damage: 10
+  FireRate: 0.3
+  SpwnAmount: 20
