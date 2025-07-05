@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd937054ee4b0f447a9322dc249ee0ea, type: 3}
   m_Name: Ranged
   m_EditorClassIdentifier: 
-  Speed: 30
-  Health: 60
-  StayTime: 3
+  Speed: 60
+  Health: 13
+  StayTime: 1
   RotateSpeed: 10
   WeaponType: 2
   EnemyType: 1

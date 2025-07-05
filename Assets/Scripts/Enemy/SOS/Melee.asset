@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd937054ee4b0f447a9322dc249ee0ea, type: 3}
   m_Name: Melee
   m_EditorClassIdentifier: 
-  Speed: 35
-  Health: 20
-  StayTime: 3
+  Speed: 80
+  Health: 12
+  StayTime: 1
   RotateSpeed: 10
   WeaponType: 0
   EnemyType: 0

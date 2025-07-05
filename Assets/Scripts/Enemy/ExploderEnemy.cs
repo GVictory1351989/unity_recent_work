@@ -1,12 +1,15 @@
 using System;
 using UnityEngine;
+
 public class ExplodedEnemy : FSMAbstract<ExplodedEnemy>, IEnemy
 {
     public Vector3 TargetPoint { get; set; }
     public EnemyType EnemyType => EnemyType.Explode;
     public WeaponConfigSO WeaponConfig { get; private set; }
+    public GameObject Slider;
     protected override IFSMState<ExplodedEnemy> GetInitialState()
     {
+        Slider = transform.Find("Slider").gameObject;
         return new ExplodeIdle();
     }
     public int Health { get; set; }
@@ -18,6 +21,7 @@ public class ExplodedEnemy : FSMAbstract<ExplodedEnemy>, IEnemy
     public float Speed { get; set; }
     public float RotateSpeed { get; set; }
     private int GlobalHealth;
+    private GameObject Slide;
     public void SetEntityConfigSO(float range,
                                  float cooldown,
                                  float damage,
@@ -35,14 +39,23 @@ public class ExplodedEnemy : FSMAbstract<ExplodedEnemy>, IEnemy
         Health = health;
         Speed = speed;
         RotateSpeed = rotateSpeed;
+        GlobalHealth = health;
     }
     public override void FSMHitted()
     {
         Health--;
+        if (Slider != null)
+        {
+            float xScale = Utils.PercentageScale(Health, GlobalHealth);
+            Vector3 scale = Slider.transform.localScale;
+            scale.x = xScale;
+            Slider.transform.localScale = scale;
+        }
         if (Health == 0)
         {
             EventManager.Publish(null, new GameEvent<Component>(this));
             Health = GlobalHealth;
+            Slider.transform.localScale = Vector3.one;
         }
     }
 }

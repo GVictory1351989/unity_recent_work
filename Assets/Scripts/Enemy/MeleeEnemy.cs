@@ -4,9 +4,11 @@ public class MeleeEnemy : FSMAbstract<MeleeEnemy>, IEnemy
 {
     public Vector3 TargetPoint { get; set; }
     public EnemyType EnemyType => EnemyType.Melee;
+    public GameObject Slider;
     protected override IFSMState<MeleeEnemy> GetInitialState()
     {
         TargetPoint = GameObject.FindWithTag("Player").transform.position;
+        Slider = transform.Find("Slider").gameObject;
         return new MeleeIdle();
     }
 
@@ -36,14 +38,23 @@ public class MeleeEnemy : FSMAbstract<MeleeEnemy>, IEnemy
         Health = health;
         Speed = speed;
         RotateSpeed = rotateSpeed;
+        GlobalHealth = health;
     }
     public override void FSMHitted()
     {
         Health--;
-        if(Health==0)
+        if (Slider != null)
+        {
+            float xScale = Utils.PercentageScale(Health, GlobalHealth);
+            Vector3 scale = Slider.transform.localScale;
+            scale.x = xScale;
+            Slider.transform.localScale = scale;
+        }
+        if (Health==0)
         {
             EventManager.Publish(null, new GameEvent<Component>(this));
             Health = GlobalHealth;
+            Slider.transform.localScale = Vector3.one;
         }
     }
 }

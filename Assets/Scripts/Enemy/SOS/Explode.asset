@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd937054ee4b0f447a9322dc249ee0ea, type: 3}
   m_Name: Explode
   m_EditorClassIdentifier: 
-  Speed: 30
+  Speed: 100
   Health: 10
-  StayTime: 3
+  StayTime: 1
   RotateSpeed: 10
   WeaponType: 3
   EnemyType: 2
