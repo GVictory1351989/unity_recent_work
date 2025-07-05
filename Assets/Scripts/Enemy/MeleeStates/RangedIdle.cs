@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
+using UnityEngine.Scripting;
 
+[Preserve]
+[FSMState("Idle", true)]
 public class RangedIdle : IFSMState<RangedEnemy>
 {
     private float timer;
@@ -15,7 +18,7 @@ public class RangedIdle : IFSMState<RangedEnemy>
         timer += Time.deltaTime;
         if (Vector3.Distance(player.position, enemy.transform.position) > 10f)
         {
-            enemy.ChangeState(new RangedChase());
+            enemy.ChangeStateByName("Chase");
         }
         else if (timer >= waitTime)
         {

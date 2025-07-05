@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
+using UnityEngine.Scripting;
 
+[Preserve]
+[FSMState("Attack")]
 public class RangedAttack : IFSMState<RangedEnemy>
 {
     private float timer;
@@ -17,7 +20,7 @@ public class RangedAttack : IFSMState<RangedEnemy>
         float distance = Vector3.Distance(player.position, fsmentity.transform.position);
         if (distance > 11)
         {
-            fsmentity.ChangeState(new RangedChase());
+            fsmentity.ChangeStateByName("Chase");
             return;
         }
         timer += Time.deltaTime;

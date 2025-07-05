@@ -10,7 +10,7 @@ public class EventManager
     /// Dictionary have delegates 
     /// where multiple methods attach with a single delegate 
     /// </summary>
-    private static Dictionary<Type, Delegate> events = new Dictionary<Type, Delegate>();
+    private static Dictionary<Type, Delegate> events = new();
     /// <summary>
     /// In this method, we are adding a new method (callback) to event list.
     /// So, when event happens, this method will be called.
@@ -47,16 +47,6 @@ public class EventManager
         }
     }
 
-    internal static void Subscribe(string v, object hitEvent)
-    {
-        throw new NotImplementedException();
-    }
-
-    internal static void Unsubscribe(string v, object hitEvent)
-    {
-        throw new NotImplementedException();
-    }
-
     /// <summary>
     ///This method sends(publishes) the event to all subscribed listeners.
     /// All methods that are subscribed to this event type will be called.
@@ -77,8 +67,4 @@ public class EventManager
         }
     }
 
-    internal static void Subscribe<T>(object p)
-    {
-        throw new NotImplementedException();
-    }
 }

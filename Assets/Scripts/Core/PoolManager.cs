@@ -78,22 +78,19 @@ public static class PoolManager
     public static List<T> AddList<T>(GameObject prefab, int count = 10) where T : Component
     {
         Type type = typeof(T);
-        List<T> components = new List<T>();
+        List<T> components = new();
 
         if (!poolObjects.ContainsKey(type))
         {
             poolObjects[type] = new Queue<GameObject>();
             prefabMap[type] = prefab;
-
             for (int i = 0; i < count; i++)
             {
                 GameObject obj = MonoBehaviour.Instantiate(prefab);
                 obj.SetActive(false);
-
                 // Attach component T if not present
                 T component = obj.AddComponent<T>();
                 components.Add(component);
-
                 poolObjects[type].Enqueue(obj);
             }
         }

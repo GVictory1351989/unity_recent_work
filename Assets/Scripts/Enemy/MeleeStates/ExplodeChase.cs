@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using UnityEngine.Scripting;
 
+[Preserve]
+[FSMState("Chase")]
 public class ExplodeChase : IFSMState<ExplodedEnemy>
 {
     private float speed = 18f;
@@ -18,7 +21,7 @@ public class ExplodeChase : IFSMState<ExplodedEnemy>
         float distance = Vector3.Distance(player.position, enemy.transform.position);
         if (distance <=1.1)
         {
-            enemy.ChangeState(new ExplodeAttack());
+            enemy.ChangeStateByName("Attack");
             return;
         }
         Vector3 direction = (player.position - enemy.transform.position).normalized;

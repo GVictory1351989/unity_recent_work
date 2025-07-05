@@ -8,7 +8,7 @@ public class RangedEnemy : EnemyBase<RangedEnemy>
     {
         Player = GameObject.FindGameObjectWithTag("Player").transform;
         InitSlider();
-        return new RangedIdle();
+        return FSMStateRegistry<RangedEnemy>.GetInitialStateInstance();
     }
 }
 

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 // This is a generic FSM base class.
@@ -32,6 +33,20 @@ public abstract class FSMAbstract<T> : MonoBehaviour, IGameSystem, IDamagable
         currentState = initialState;
         currentState.Enter((T)this); // Call Enter() of the state
         isActiveFSM = true;
+    }
+    // by reflection change state by name 
+    public void ChangeStateByName(string stateName)
+    {
+        var type = FSMStateRegistry<T>.GetStateType(stateName);
+        if (type != null)
+        {
+            var instance = Activator.CreateInstance(type) as IFSMState<T>;
+            ChangeState(instance);
+        }
+        else
+        {
+            Debug.LogError($"FSM state '{stateName}' not found for {typeof(T).Name}");
+        }
     }
 
     // Change to a new state (like from Idle to Attack)

@@ -7,7 +7,7 @@ public class MeleeEnemy : EnemyBase<MeleeEnemy>
     {
         TargetPoint = GameObject.FindWithTag("Player").transform.position;
         InitSlider();
-        return new MeleeIdle();
+        return FSMStateRegistry<MeleeEnemy>.GetInitialStateInstance(); 
     }
 }
 

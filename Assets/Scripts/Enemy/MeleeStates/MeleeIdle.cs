@@ -1,5 +1,9 @@
 ﻿
 using UnityEngine;
+using UnityEngine.Scripting;
+
+[Preserve]
+[FSMState("Idle", isInitial: true)]
 public class MeleeIdle : IFSMState<MeleeEnemy>
 {
     private float timer;
@@ -13,7 +17,7 @@ public class MeleeIdle : IFSMState<MeleeEnemy>
         timer -= Time.deltaTime;
         if (timer <= 0)
         {
-            fsmentity.ChangeState(new MeleeChase()); // Move to chase
+            fsmentity.ChangeStateByName("Chase");
         }
     }
     public void Exit(FSMAbstract<MeleeEnemy> fsmentity)

@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
+using UnityEngine.Scripting;
 
-/// <summary>
-/// MeleeEnemy ke liye attack state — attack karta hai jab target range mein ho.
-/// </summary>
+[Preserve]
+[FSMState("Attack")]
 public class ExplodeAttack : IFSMState<ExplodedEnemy>
 {
     public void Enter(FSMAbstract<ExplodedEnemy> fsmentity)

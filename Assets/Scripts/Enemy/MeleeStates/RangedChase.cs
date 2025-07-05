@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
+using UnityEngine.Scripting;
 
+[Preserve]
+[FSMState("Chase")]
 public class RangedChase : IFSMState<RangedEnemy>
 {
     private float speed = 12f;
@@ -14,7 +17,7 @@ public class RangedChase : IFSMState<RangedEnemy>
         float distance = Vector3.Distance(player.position, enemy.transform.position);
         if (distance <= 10)
         {
-            enemy.ChangeState(new RangedAttack());
+            enemy.ChangeStateByName("Attack");
             return;
         }
         Vector3 direction = (player.position - enemy.transform.position).normalized;

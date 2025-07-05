@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
 using System;
+using UnityEngine.Scripting;
+
+[Preserve]
+[FSMState("Attack")]
 public class MeleeAttack : IFSMState<MeleeEnemy>
 {
     private float timer = 0f;
@@ -14,10 +18,9 @@ public class MeleeAttack : IFSMState<MeleeEnemy>
         float dist = Vector3.Distance(enemy.TargetPoint, fsmentity.transform.position);
         if (dist > enemy.AvoidRadius)
         {
-            fsmentity.ChangeState(new MeleeChase());
+            fsmentity.ChangeStateByName("Chase");
             return;
         }
-
         if (timer >= enemy.AttackCooldown)
         {
             timer = 0f;

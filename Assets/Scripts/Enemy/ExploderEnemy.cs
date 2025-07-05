@@ -6,7 +6,7 @@ public class ExplodedEnemy : EnemyBase<ExplodedEnemy>
     protected override IFSMState<ExplodedEnemy> GetInitialState()
     {
         InitSlider();
-        return new ExplodeIdle();
+        return FSMStateRegistry<ExplodedEnemy>.GetInitialStateInstance();
     }
 }
 

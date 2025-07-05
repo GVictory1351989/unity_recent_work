@@ -1,5 +1,9 @@
 ﻿
 using UnityEngine;
+using UnityEngine.Scripting;
+
+[Preserve]
+[FSMState("Idle",true)]
 public class ExplodeIdle : IFSMState<ExplodedEnemy>
 {
     private float timer;
@@ -15,7 +19,7 @@ public class ExplodeIdle : IFSMState<ExplodedEnemy>
         timer += Time.deltaTime;
         if (Vector3.Distance(player.position, enemy.transform.position) > 1f)
         {
-            enemy.ChangeState(new ExplodeChase());
+            enemy.ChangeStateByName("Chase");
         }
         else if (timer >= waitTime)
         {
